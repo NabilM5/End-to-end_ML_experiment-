@@ -1,0 +1,60 @@
+# ────────────────────────────────────────────────────────────────────────────
+# docker-compose.yml — project_1: E-Commerce Product Categorisation
+#
+# Services:
+#   1. mlflow      — MLflow Tracking Server UI  →  http://localhost:5001
+#   2. experiment  — Full pipeline: preprocess → train (logs to mlflow)
+#
+# Usage:
+#   docker compose up mlflow              # start only MLflow UI
+#   docker compose up --build experiment  # run experiment (needs mlflow running)
+#   docker compose up --build             # start both together
+# ────────────────────────────────────────────────────────────────────────────
+
+services:
+
+  # ── Service 1: MLflow Tracking Server ────────────────────────────────────
+  mlflow:
+    build:
+      context: .
+      dockerfile: Dockerfile.mlflow
+    image: project1_mlflow_image   # cached after first build — no re-downloading
+    container_name: project1_mlflow
+    ports:
+      - "5001:5000"
+    volumes:
+      - mlflow_data:/mlflow                 # SQLite DB + metadata
+      - ./mlflow_artifacts:/app/artifacts   # Artifacts accessible from Mac
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://localhost:5000/health')"
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 120s
+
+  # ── Service 2: Full Experiment Runner ────────────────────────────────────
+  experiment:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: project1_experiment
+    depends_on:
+      mlflow:
+        condition: service_healthy
+    volumes:
+      - ./output:/app/output
+    environment:
+      - MLFLOW_TRACKING_URI=http://mlflow:5000
+      - DATA_DIR=/app/data
+      - OUTPUT_DIR=/app/output
+      - EXPERIMENT_NAME=project_1_ecom_categorisation
+    restart: "no"
+
+# ── Named volumes ─────────────────────────────────────────────────────────────
+volumes:
+  mlflow_data:
+    driver: local

@@ -1,0 +1,24 @@
+# Dockerfile.mlflow — Pre-built MLflow tracking server image
+#
+# Build once, reuse forever. Packages are baked into the image layer so
+# `docker compose up mlflow` starts in seconds with no re-downloading.
+#
+# Rebuild only when you change mlflow or pyarrow versions:
+#   docker compose build mlflow
+
+FROM python:3.10-slim
+
+# Install pyarrow FIRST (bypasses mlflow's locked hash check on pyarrow),
+# then install mlflow which sees pyarrow already satisfied and skips it.
+RUN pip install --no-cache-dir pyarrow==18.1.0 \
+ && pip install --no-cache-dir mlflow==2.19.0
+
+EXPOSE 5000
+
+CMD ["mlflow", "server", \
+     "--backend-store-uri", "sqlite:////mlflow/mlflow.db", \
+     "--serve-artifacts", \
+     "--default-artifact-root", "mlflow-artifacts:/", \
+     "--artifacts-destination", "/app/artifacts", \
+     "--host", "0.0.0.0", \
+     "--port", "5000"]

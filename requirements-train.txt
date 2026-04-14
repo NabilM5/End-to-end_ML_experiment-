@@ -1,0 +1,39 @@
+# ────────────────────────────────────────────────────────────────────────────
+# requirements-train.txt — minimal dependencies for the training container
+# Used by Dockerfile only. Keeps the Docker image small and fast to build.
+# For the full local dev environment (notebooks, EDA) use requirements.txt
+# ────────────────────────────────────────────────────────────────────────────
+
+# Core ML
+scikit-learn==1.5.2
+numpy==1.26.4
+scipy==1.13.1
+joblib==1.4.2
+
+# Data
+pandas==2.2.3
+pyarrow==17.0.0
+
+# MLflow tracking
+mlflow==2.19.0
+
+# MLflow dependencies (pinned to avoid hash conflicts)
+alembic==1.13.3
+click==8.1.7
+Flask==3.0.3
+gunicorn==22.0.0
+itsdangerous==2.2.0
+Jinja2==3.1.4
+Mako==1.3.5
+MarkupSafe==2.1.5
+packaging==24.1
+protobuf==4.25.3
+python-dateutil==2.9.0.post0
+PyYAML==6.0.2
+requests==2.32.3
+sqlalchemy==2.0.35
+Werkzeug==3.0.4
+gitpython==3.1.43
+cloudpickle==3.0.0
+sqlparse==0.5.1
+importlib-metadata==8.0.0
