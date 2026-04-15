@@ -3,7 +3,7 @@
 **MLOps course ·HSE University· Spring 2026**
 **Student:** Nabil Mouhamech (`n.mukhamesh`)
 **Presentation link:** `<PASTE_PRESENTATION_LINK_HERE>`
-**Colab link:** `<https://colab.research.google.com/drive/1aaDhbJDnN9Wl20Ys6OC_NE9zUc4kGMj3?usp=sharing>`
+**Colab link:** `https://colab.research.google.com/drive/1aaDhbJDnN9Wl20Ys6OC_NE9zUc4kGMj3?usp=sharing`
 
 ---
 
