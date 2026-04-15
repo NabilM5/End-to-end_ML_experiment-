@@ -2,7 +2,7 @@
 
 **MLOps course ·HSE University· Spring 2026**
 **Student:** Nabil Mouhamech (`n.mukhamesh`)
-**Presentation link:** [Open presentation](https://PASTE_PRESENTATION_LINK_HERE)
+**Presentation link:** [Open presentation](https://docs.google.com/presentation/d/15_dzpaGcOt_l7-4QNDafxDhK0aLiithioCvvKhGbm_M/edit?slide=id.g3d651261189_0_0#slide=id.g3d651261189_0_0)
 **Colab link:** [Open Colab notebook](https://colab.research.google.com/drive/1aaDhbJDnN9Wl20Ys6OC_NE9zUc4kGMj3?usp=sharing)
 
 ---
@@ -30,7 +30,7 @@ using their textual metadata (name, description, model, vendor, URL, …).
 - [x] End-to-end script: `run_experiment.sh`
 - [x] Pinned dependencies: `requirements.txt`
 - [x] MLflow tracking of params/metrics/artifacts
-- [ ] Presentation link added
+- [x] Presentation link added
 - [x] Colab link added
 
 ---
