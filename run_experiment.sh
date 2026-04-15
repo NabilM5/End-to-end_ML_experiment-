@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# ────────────────────────────────────────────────────────────────────────────
 # run_experiment.sh — End-to-end ML experiment for project_1
 #
 # Modes:
@@ -11,7 +10,6 @@
 #
 # Docker prerequisites:
 #   docker, docker compose
-# ────────────────────────────────────────────────────────────────────────────
 
 set -euo pipefail   # exit on error, undefined var, pipe failure
 
@@ -142,5 +140,5 @@ echo "   View results in MLflow UI:"
 echo "     → $MLFLOW_URI"
 echo ""
 echo "   Or start the MLflow UI locally:"
-echo "     mlflow ui --port 5000"
+echo "     mlflow ui --port 5001"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"

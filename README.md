@@ -2,7 +2,8 @@
 
 **MLOps course ·HSE University· Spring 2026**
 **Student:** Nabil Mouhamech (`n.mukhamesh`)
-**Presentation link:** *(add when available)*
+**Presentation link:** `<PASTE_PRESENTATION_LINK_HERE>`
+**Colab link:** `<https://colab.research.google.com/drive/1aaDhbJDnN9Wl20Ys6OC_NE9zUc4kGMj3?usp=sharing>`
 
 ---
 
@@ -18,6 +19,19 @@ using their textual metadata (name, description, model, vendor, URL, …).
 | **Model** | `TfidfVectorizer` + `LogisticRegression` (sklearn Pipeline) |
 | **Tracking** | MLflow — 3 runs sweeping `max_features` · `ngram_range` · `C` |
 | **Metric** | macro-F1 (primary), accuracy (secondary) |
+
+---
+
+## Quick Evaluation Checklist
+
+- [x] EDA notebook: `notebooks/eda.ipynb`
+- [x] Data preprocessing script: `src/preprocess.py`
+- [x] Training script: `src/train.py`
+- [x] End-to-end script: `run_experiment.sh`
+- [x] Pinned dependencies: `requirements.txt`
+- [x] MLflow tracking of params/metrics/artifacts
+- [ ] Presentation link added
+- [x] Colab link added **Colab link:** `<https://colab.research.google.com/drive/1aaDhbJDnN9Wl20Ys6OC_NE9zUc4kGMj3?usp=sharing>`
 
 ---
 
@@ -56,8 +70,8 @@ pip install -r requirements.txt
 ### 2. Start MLflow UI (separate terminal)
 
 ```bash
-mlflow ui --port 5000
-# Open http://localhost:5000
+mlflow ui --port 5001
+# Open http://localhost:5001
 ```
 
 ### 3. Run the full pipeline
@@ -76,7 +90,7 @@ This runs two steps automatically:
 
 ### 4. Inspect results
 
-Open **http://localhost:5000** — you will see the experiment
+Open **http://localhost:5001** — you will see the experiment
 `project_1_ecom_categorisation` with three runs and all metrics logged.
 
 ---
@@ -89,10 +103,10 @@ chmod +x run_experiment.sh
 ```
 
 Docker Compose starts two containers:
-- **`project1_mlflow`** — MLflow server on `http://localhost:5000`
+- **`project1_mlflow`** — MLflow server on `http://localhost:5001`
 - **`project1_experiment`** — runs preprocess + train, then exits
 
-After it finishes open **http://localhost:5000** to view results.
+After it finishes open **http://localhost:5001** to view results.
 The MLflow runs are persisted in the `mlflow_data` Docker volume.
 
 ### Keep MLflow UI running after the experiment
@@ -125,7 +139,7 @@ python src/preprocess.py \
 ```
 python src/train.py \
     --data-dir   output/ \
-    --mlflow-uri http://localhost:5000 \
+    --mlflow-uri http://localhost:5001 \
     --experiment project_1_ecom_categorisation \
     --max-features 150000 \
     --ngram-max 2 \
